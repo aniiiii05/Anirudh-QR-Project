@@ -1,0 +1,19 @@
+3D WORKSPACE — CREDITS AND PROVENANCE
+
+Original scene geometry, composition and React integration created for Anirudh Sharma's QR card project. This is an imaginary workspace, not a representation of Anirudh's real home or office.
+
+Bruno Simon / folio-2025
+https://github.com/brunosimon/folio-2025
+Reviewed commit: 41046b57eeed8d156d9c3fd7fa259900baef7816
+Camera framing, adaptive rendering and interactive-world techniques informed this implementation. clamp/lerp helpers are adapted from sources/Game/utilities/maths.js under the repository's MIT licence. Full notice: /notices/bruno-simon-folio-MIT.txt
+
+Bruno Simon / my-room-in-3d
+https://github.com/brunosimon/my-room-in-3d
+Reviewed commit: 5d00b3f870da81f103e901e0d12e20bbcc816834
+Visual reference for an explorable miniature room and bounded camera views. package.json is marked UNLICENSED; no source code, 3D models, baked textures, sounds or other assets from that repository have been copied.
+
+Three.js — MIT
+https://github.com/mrdoob/three.js
+Licence notice: /notices/three-MIT.txt
+
+No affiliation with or endorsement by Bruno Simon is implied.
