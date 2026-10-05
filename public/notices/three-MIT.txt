@@ -1,3 +1,15 @@
+NOTICE FOR three.js
+===================
+
+Package:  three 0.183.2 (npm), https://github.com/mrdoob/three.js
+Licence:  MIT — node_modules/three/LICENSE, reproduced in full below.
+
+Used for the optional 3D workspace (loaded only after "Explore in 3D"),
+including two modules shipped inside the three package:
+  - three/examples/jsm/geometries/RoundedBoxGeometry.js
+  - three/examples/jsm/utils/BufferGeometryUtils.js (mergeGeometries)
+
+----------------------------------------------------------------------------
 The MIT License
 
 Copyright © 2010-2026 three.js authors

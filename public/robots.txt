@@ -1,14 +1,6 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Safe default for development and review builds: do not index.
+# `npm run build` replaces this file in dist/ (scripts/card-html.mjs): with a
+# valid SITE_ORIGIN it allows crawling and links the sitemap; without one it
+# keeps Disallow: /.
 User-agent: *
-Allow: /
+Disallow: /

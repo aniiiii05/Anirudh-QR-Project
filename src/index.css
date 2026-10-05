@@ -2,166 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * shadcn/Radix theme variables (HSL channels) mapped to the card palette so
+ * the dialog, overlay and any shared primitive match the page.
+ * cream #FBE4D8 · night #190019 · plum #522B5B · blush #DFB6B2 · mauve #854F6C
+ */
 @layer base {
   :root {
-    --background: 210 75% 58%;
-    --foreground: 0 0% 100%;
+    --background: 21 85% 92%;
+    --foreground: 300 100% 5%;
 
-    --card: 25 55% 35%;
-    --card-foreground: 0 0% 100%;
+    --card: 21 85% 95%;
+    --card-foreground: 300 100% 5%;
 
-    --popover: 25 55% 35%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 21 85% 95%;
+    --popover-foreground: 300 100% 5%;
 
-    --primary: 0 80% 50%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 300 100% 5%;
+    --primary-foreground: 21 85% 92%;
 
-    --secondary: 120 65% 38%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 5 46% 79%;
+    --secondary-foreground: 300 100% 5%;
 
-    --muted: 25 40% 28%;
-    --muted-foreground: 45 30% 80%;
+    --muted-foreground: 289 36% 26%;
 
-    --accent: 45 100% 50%;
-    --accent-foreground: 25 60% 20%;
+    --accent: 5 46% 79%;
+    --accent-foreground: 300 100% 5%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 4 76% 40%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 25 50% 40%;
-    --input: 25 50% 40%;
-    --ring: 45 100% 50%;
+    --border: 5 30% 75%;
+    --input: 300 100% 5%;
+    --ring: 327 26% 42%;
 
-    --radius: 0.25rem;
-
-    --mario-red: 0 80% 50%;
-    --mario-green: 120 65% 38%;
-    --mario-blue: 210 75% 58%;
-    --mario-gold: 45 100% 50%;
-    --mario-brown: 25 55% 35%;
-    --mario-brick: 15 70% 45%;
-    --mario-sky: 210 80% 70%;
-    --mario-ground: 25 60% 30%;
+    --radius: 1rem;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'VT323', monospace;
-    image-rendering: pixelated;
+    margin: 0;
+    background: #fbe4d8;
+    color: #190019;
+    font-family: "Balimo", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Press Start 2P', cursive;
-  }
-  code, .font-mono {
-    font-family: 'Press Start 2P', cursive;
+
+  ::selection {
+    background: #dfb6b2;
+    color: #190019;
   }
 }
 
-@layer components {
-  .glass-card {
-    @apply rounded-none border-4;
-    background: hsl(var(--mario-brown));
-    border-color: hsl(var(--mario-brick));
-    border-style: solid;
-    box-shadow: 4px 4px 0 hsl(var(--mario-ground)), inset 2px 2px 0 hsla(0 0% 100% / 0.15);
-  }
-  .glass-card:hover {
-    border-color: hsl(var(--mario-gold));
-    box-shadow: 4px 4px 0 hsl(var(--mario-ground)), 0 0 20px hsla(45 100% 50% / 0.3);
-    transform: translateY(-2px);
-  }
-  .gradient-text {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(135deg, hsl(var(--mario-red)), hsl(var(--mario-gold)));
-  }
-  .gradient-bg {
-    background: linear-gradient(135deg, hsl(var(--mario-red)), hsl(var(--mario-gold)));
-  }
-  .glow-button {
-    @apply relative overflow-hidden font-bold uppercase tracking-wider;
-    background: hsl(var(--mario-red));
-    border: 4px solid hsl(var(--mario-brick));
-    box-shadow: 4px 4px 0 hsl(var(--mario-ground));
-    transition: all 0.15s ease;
-  }
-  .glow-button:hover {
-    background: hsl(var(--mario-gold));
-    color: hsl(var(--mario-ground));
-    box-shadow: 6px 6px 0 hsl(var(--mario-ground));
-    transform: translateY(-2px);
-  }
-  .section-container {
-    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  .glow-ring {
-    box-shadow: 4px 4px 0 hsl(var(--mario-ground));
-    border: 4px solid hsl(var(--mario-green));
-  }
-
-  /* Mario brick pattern */
-  .brick-pattern {
-    background-color: hsl(var(--mario-brick));
-    background-image:
-      linear-gradient(335deg, hsla(25 60% 30% / 0.6) 23px, transparent 23px),
-      linear-gradient(155deg, hsla(25 60% 30% / 0.6) 23px, transparent 23px),
-      linear-gradient(335deg, hsla(25 60% 30% / 0.6) 23px, transparent 23px),
-      linear-gradient(155deg, hsla(25 60% 30% / 0.6) 23px, transparent 23px);
-    background-size: 58px 58px;
-    background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
-  }
-
-  /* Question block style */
-  .question-block {
-    background: hsl(var(--mario-gold));
-    border: 4px solid hsl(25 70% 35%);
-    box-shadow: inset -4px -4px 0 hsla(25 70% 30% / 0.5), inset 4px 4px 0 hsla(45 100% 70% / 0.5), 4px 4px 0 hsl(var(--mario-ground));
-    color: hsl(25 60% 20%);
-  }
-
-  /* Pipe style */
-  .pipe-style {
-    background: linear-gradient(90deg, hsl(120 50% 30%), hsl(120 65% 45%), hsl(120 50% 30%));
-    border: 4px solid hsl(120 40% 25%);
-    box-shadow: 4px 4px 0 hsl(var(--mario-ground));
-  }
-
-  /* Ground section */
-  .ground-section {
-    background: hsl(var(--mario-ground));
-    border-top: 8px solid hsl(var(--mario-brick));
-  }
-
-  /* Cloud style */
-  .cloud-card {
-    background: hsla(0 0% 100% / 0.9);
-    border: 3px solid hsla(200 30% 85% / 0.8);
-    border-radius: 9999px;
-    color: hsl(210 30% 30%);
-    box-shadow: 4px 4px 0 hsla(200 30% 80% / 0.5);
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Radix dialog overlay: soft ink wash instead of near-black. */
+.bg-black\/80[data-state] {
+  background-color: rgba(25, 0, 25, 0.55);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
 
-/* Animated clouds */
-@keyframes cloud-float {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(30px); }
-}
-
-@keyframes coin-spin {
-  0%, 100% { transform: rotateY(0deg); }
-  50% { transform: rotateY(180deg); }
-}
-
-@keyframes bounce-block {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+/* Reduced motion: also calm third-party (tailwindcss-animate) transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ["VT323", "monospace"],
-        heading: ["Press Start 2P", "cursive"],
-        mono: ["Press Start 2P", "cursive"],
+        sans: ["var(--font-body)"],
+        heading: ["var(--font-display)"],
+        mono: ["var(--font-mono)"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,16 +51,6 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
-        },
-        mario: {
-          red: "hsl(var(--mario-red))",
-          green: "hsl(var(--mario-green))",
-          blue: "hsl(var(--mario-blue))",
-          gold: "hsl(var(--mario-gold))",
-          brown: "hsl(var(--mario-brown))",
-          brick: "hsl(var(--mario-brick))",
-          sky: "hsl(var(--mario-sky))",
-          ground: "hsl(var(--mario-ground))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

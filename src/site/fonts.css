@@ -1,0 +1,29 @@
+/* Licensed brand fonts (owner-supplied): SA Triumph for display, Balimo for text. */
+@font-face {
+  font-family: "SA Triumph";
+  src: url("./fonts/SATriumph.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "SA Triumph Outline";
+  src: url("./fonts/SATriumph-Outline.woff") format("woff");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Balimo";
+  src: url("./fonts/Balimo-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Balimo";
+  src: url("./fonts/Balimo-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Balimo";
+  src: url("./fonts/Balimo-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}

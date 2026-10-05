@@ -1,13 +1,19 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "types": ["node"],
     "noEmit": true
   },
-  "include": ["api/**/*.ts", "src/card/logic.ts", "src/card/profile.ts"]
+  "include": [
+    "api/**/*.ts",
+    "src/card/logic.ts",
+    "src/card/profile.ts",
+    "src/card/vcard.ts"
+  ]
 }

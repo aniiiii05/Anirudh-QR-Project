@@ -1,19 +1,53 @@
 3D WORKSPACE — CREDITS AND PROVENANCE
+=====================================
 
-Original scene geometry, composition and React integration created for Anirudh Sharma's QR card project. This is an imaginary workspace, not a representation of Anirudh's real home or office.
+What it is
+----------
+"A little room for ideas" is an imaginary workspace. It is not a picture of
+Anirudh Sharma's real home or office.
 
-Bruno Simon / folio-2025
+Everything you see in it — the room, desk, monitor and sample chart, keyboard,
+mouse, mug, lamp, idea board and notes, notebook, stool, pouf, plant, shelf
+and books, rug, window and the building blocks — is original procedural
+geometry written for this project (src/card/three/roomScene.ts). There are no
+downloaded 3D models, textures, sounds or fonts in the scene. The chart is
+sample decoration, not real data.
+
+The still image shown before "Explore in 3D" is a render of that same scene
+from the same camera. It is regenerated with:
+
+    node scripts/render-poster.mjs
+
+which writes public/workspace-room.webp and public/workspace-room.png.
+
+Bruno Simon — folio-2025 (MIT)
+------------------------------
 https://github.com/brunosimon/folio-2025
-Reviewed commit: 41046b57eeed8d156d9c3fd7fa259900baef7816
-Camera framing, adaptive rendering and interactive-world techniques informed this implementation. clamp/lerp helpers are adapted from sources/Game/utilities/maths.js under the repository's MIT licence. Full notice: /notices/bruno-simon-folio-MIT.txt
+Commit reviewed: 41046b57eeed8d156d9c3fd7fa259900baef7816
 
-Bruno Simon / my-room-in-3d
+Studied for ideas: scene organisation, camera targets with smoothing,
+rendering only when visible, and quality scaling for slower devices.
+Adapted code: three small maths helpers — clamp, lerp and smoothstep — from
+sources/Game/utilities/maths.js, used in src/card/three/maths.ts.
+Licence: the repository's root license.md is MIT (Copyright (c) 2025 Bruno
+Simon). Its package.json says "ISC" instead; that conflict is noted in the full
+notice: /notices/bruno-simon-folio-MIT.txt
+
+Bruno Simon — my-room-in-3d (conceptual reference only)
+-------------------------------------------------------
 https://github.com/brunosimon/my-room-in-3d
-Reviewed commit: 5d00b3f870da81f103e901e0d12e20bbcc816834
-Visual reference for an explorable miniature room and bounded camera views. package.json is marked UNLICENSED; no source code, 3D models, baked textures, sounds or other assets from that repository have been copied.
+Commit reviewed: 5d00b3f870da81f103e901e0d12e20bbcc816834
 
-Three.js — MIT
-https://github.com/mrdoob/three.js
-Licence notice: /notices/three-MIT.txt
+Studied for ideas only: how a small room gives objects a place and meaning,
+how a bounded camera keeps a scene approachable, and the cosy lighting mood.
+Its package.json declares "license": "UNLICENSED" and the repository has no
+licence file, so nothing was copied from it: no code, models, baked textures,
+shaders, sounds or other assets.
 
-No affiliation with or endorsement by Bruno Simon is implied.
+three.js (MIT)
+--------------
+https://github.com/mrdoob/three.js — version 0.183.2
+Full notice: /notices/three-MIT.txt
+
+No affiliation with, or endorsement by, Bruno Simon or the three.js authors is
+implied. Fonts used elsewhere on the page are not covered by this notice.

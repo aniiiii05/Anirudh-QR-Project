@@ -1,0 +1,507 @@
+/*
+ * 3D workspace section (guide §8). Reads the shared tokens from tokens.css.
+ * Everything is scoped under .workspace-3d so page styles and these rules
+ * cannot leak into each other.
+ */
+.workspace-3d {
+  --room-stage-bg: #f3d6ca;
+  --room-glass: rgba(253, 240, 233, 0.94);
+  --room-shadow: 0 18px 40px -28px rgba(25, 0, 25, 0.45);
+  display: grid;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(32px, 5vw, 76px);
+  align-items: center;
+  padding-block: clamp(56px, 8vw, 104px);
+  padding-inline: max(var(--gutter), calc((100% - var(--content-max)) / 2));
+  border-bottom: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-body);
+  scroll-margin-top: 24px;
+}
+.workspace-3d *,
+.workspace-3d *::before,
+.workspace-3d *::after {
+  box-sizing: border-box;
+}
+.workspace-3d button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.workspace-3d :focus {
+  outline: none;
+}
+.workspace-3d :focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ---------------------------------------------------------------- copy */
+.workspace-3d .workspace-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.workspace-3d .workspace-eyebrow::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  background: var(--lime);
+  transform: rotate(-8deg);
+}
+.workspace-3d .workspace-title {
+  margin: 22px 0 18px;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.4vw, 64px);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+.workspace-3d .workspace-title > span {
+  display: block;
+}
+.workspace-3d .workspace-intro {
+  margin: 0;
+  max-width: 36ch;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.workspace-3d .room-areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 30px;
+}
+.workspace-3d .room-area {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 18px 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: 15px;
+  font-weight: 500;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.workspace-3d .room-area-index {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+.workspace-3d .room-area:hover,
+.workspace-3d .room-area[data-hover] {
+  border-color: var(--ink);
+}
+.workspace-3d .room-area[aria-pressed="true"] {
+  background: var(--lime);
+  border-color: var(--ink);
+}
+.workspace-3d .room-area[aria-pressed="true"] .room-area-index {
+  color: var(--ink);
+}
+.workspace-3d .room-area:active {
+  transform: translateY(1px);
+}
+
+.workspace-3d .room-detail {
+  min-height: 150px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.workspace-3d .room-description {
+  margin: 0;
+  max-width: 40ch;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.workspace-3d .room-open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 16px;
+  padding: 0 20px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--canvas);
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.workspace-3d .room-open:hover {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+}
+.workspace-3d .room-credit {
+  display: inline-block;
+  margin-top: 18px;
+  padding-block: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.workspace-3d .room-credit:hover {
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- stage */
+.workspace-3d .room-figure {
+  position: relative;
+  min-width: 0;
+}
+.workspace-3d .room-stage {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background-color: var(--room-stage-bg);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(25, 0, 25, 0.075) 1px, transparent 1.2px),
+    radial-gradient(120% 95% at 50% 20%, #fdf0e9 0%, #f3d6ca 58%, #dfb6b2 100%);
+  background-size:
+    22px 22px,
+    100% 100%;
+  isolation: isolate;
+}
+.workspace-3d .room-poster,
+.workspace-3d .room-poster img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.workspace-3d .room-poster img {
+  object-fit: contain;
+  transition: opacity var(--dur-med) var(--ease-out) var(--dur-med);
+}
+.workspace-3d .room-stage.is-active .room-poster img {
+  opacity: 0;
+}
+
+.workspace-3d .room-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+.workspace-3d .room-stage.is-active .room-canvas {
+  opacity: 1;
+}
+.workspace-3d .room-stage.is-error .room-canvas {
+  visibility: hidden;
+}
+.workspace-3d .room-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Still-image highlight: a soft spotlight that dims the rest of the room. */
+.workspace-3d .room-spot {
+  position: absolute;
+  z-index: 1;
+  width: var(--spot-w, 30%);
+  height: var(--spot-h, 34%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 0 2px var(--lime),
+    0 0 0 3px var(--ink),
+    0 0 0 200vmax rgba(251, 228, 216, 0.52);
+  pointer-events: none;
+  transition:
+    left var(--dur-med) var(--ease-in-out),
+    top var(--dur-med) var(--ease-in-out),
+    width var(--dur-med) var(--ease-in-out),
+    height var(--dur-med) var(--ease-in-out);
+}
+.workspace-3d .room-spot-operations {
+  --spot-w: 34%;
+  --spot-h: 40%;
+}
+.workspace-3d .room-spot-practice {
+  --spot-w: 34%;
+  --spot-h: 44%;
+}
+.workspace-3d .room-spot-workflow {
+  --spot-w: 34%;
+  --spot-h: 30%;
+}
+
+/* Hotspot pins: real buttons placed over the scene. */
+.workspace-3d .room-pins {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.workspace-3d .room-pin {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 30px;
+  padding: 0 11px 0 8px;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--room-glass);
+  box-shadow: var(--room-shadow);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: auto;
+  transform: translate(-50%, calc(-100% - 9px));
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.workspace-3d .room-pin[hidden] {
+  display: none;
+}
+/* Generous invisible hit area for touch. */
+.workspace-3d .room-pin::before {
+  content: "";
+  position: absolute;
+  inset: -8px -6px;
+}
+/* A short leader line down to the object. */
+.workspace-3d .room-pin::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 9px;
+  background: var(--ink);
+}
+.workspace-3d .room-pin-dot {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--lime);
+}
+.workspace-3d .room-pin:hover,
+.workspace-3d .room-pin[data-hover] {
+  background: var(--canvas);
+  transform: translate(-50%, calc(-100% - 12px));
+}
+.workspace-3d .room-pin[aria-pressed="true"] {
+  background: var(--lime);
+}
+.workspace-3d .room-pin[aria-pressed="true"] .room-pin-dot {
+  background: var(--ink);
+}
+
+/* Polite status: visible while loading or after a problem. */
+.workspace-3d .room-status {
+  position: absolute;
+  z-index: 3;
+  top: 14px;
+  left: 14px;
+  max-width: min(420px, calc(100% - 28px));
+  margin: 0;
+  padding: 10px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--room-glass);
+  box-shadow: var(--room-shadow);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.workspace-3d .room-status:empty,
+.workspace-3d .room-status.is-quiet {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+.workspace-3d .room-figure.is-loading .room-status::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: var(--cobalt);
+  vertical-align: 1px;
+  animation: room-pulse 1.1s var(--ease-in-out) infinite alternate;
+}
+@keyframes room-pulse {
+  from {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------------------------------------------------------------- toolbar */
+.workspace-3d .room-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-top: 14px;
+}
+.workspace-3d .room-caption {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.workspace-3d .room-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+.workspace-3d .room-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.workspace-3d .room-button:hover {
+  border-color: var(--ink);
+}
+.workspace-3d .room-button.is-primary {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--canvas);
+}
+.workspace-3d .room-button.is-primary:hover {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+}
+.workspace-3d .room-button[aria-disabled="true"] {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width: 900px) {
+  .workspace-3d {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .workspace-3d .room-detail {
+    min-height: 0;
+  }
+  .workspace-3d .room-figure {
+    width: 100%;
+    max-width: 680px;
+  }
+  /* Narrow stages: the status sits under the scene so it never covers or
+     blocks the hotspot pins. */
+  .workspace-3d .room-status {
+    position: static;
+    max-width: none;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .workspace-3d .room-stage {
+    border-radius: var(--radius-md);
+  }
+  /* Phones: dot-only pins held just above their object by a short leader, so
+     they label the object without covering it. The name stays in the
+     aria-label, and the visible text lives in the Data / Product / Automation
+     buttons under the stage. The ::before keeps a 44px touch target. */
+  .workspace-3d .room-pin {
+    justify-content: center;
+    width: 22px;
+    min-height: 22px;
+    height: 22px;
+    padding: 0;
+    gap: 0;
+    transform: translate(-50%, calc(-100% - 8px));
+  }
+  .workspace-3d .room-pin::before {
+    inset: -11px -11px -6px;
+    border-radius: 50%;
+  }
+  .workspace-3d .room-pin::after {
+    height: 8px;
+  }
+  .workspace-3d .room-pin-label {
+    display: none;
+  }
+  .workspace-3d .room-pin:hover,
+  .workspace-3d .room-pin[data-hover] {
+    transform: translate(-50%, calc(-100% - 10px));
+  }
+  .workspace-3d .room-pin-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .workspace-3d .room-status {
+    font-size: 13px;
+  }
+  .workspace-3d .room-caption {
+    flex-basis: 100%;
+  }
+  .workspace-3d .room-actions {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .workspace-3d *,
+  .workspace-3d *::before,
+  .workspace-3d *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,3 +1,37 @@
+NOTICE FOR CODE ADAPTED FROM BRUNO SIMON'S folio-2025
+=====================================================
+
+Source repository: https://github.com/brunosimon/folio-2025
+Commit reviewed:   41046b57eeed8d156d9c3fd7fa259900baef7816 (committed 2026-04-07)
+Licence:           MIT — root file license.md, reproduced in full below.
+
+What was adapted
+----------------
+Only three small numeric helpers, from
+  sources/Game/utilities/maths.js  (at the commit above)
+were adapted for this project (TypeScript types added; the arithmetic is unchanged):
+
+  - clamp(input, min, max)
+  - lerp(start, end, ratio)
+  - smoothstep(value, min, max)
+
+They live in src/card/three/maths.ts and are used for the camera transition
+easing and bounds of the 3D workspace. Nothing else from folio-2025 is used:
+no game, physics, vehicle, world, sound, shader, model, texture, font or
+portfolio content.
+
+Licence metadata note
+---------------------
+At the same commit, folio-2025's package.json declares "license": "ISC",
+which conflicts with the root license.md (MIT). The root licence file is the
+explicit grant for the repository's source, so this notice preserves it. Both
+MIT and ISC are permissive and require keeping the copyright and permission
+notice, which this file does. The conflict is recorded here rather than
+resolved; if the author clarifies the licence, update this notice.
+Asset-specific notices in that repository (e.g. static/sounds/musics/license.md)
+do not apply: no assets were taken.
+
+----------------------------------------------------------------------------
 MIT License
 
 Copyright (c) 2025 Bruno Simon

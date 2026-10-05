@@ -1,0 +1,55 @@
+/*
+ * Design tokens for the QR card experience (guide §6). Shared contract:
+ * page styles (card.css) and the 3D workspace styles (workspace.css) both read
+ * these names. Values may be tuned; names must not change.
+ * Brand palette (#190019 · #2B124C · #522B5B · #854F6C · #DFB6B2 · #FBE4D8)
+ * and the owner's licensed fonts, self-hosted — no third-party requests.
+ * Legacy token names (lime, cobalt) are kept so existing rules keep working.
+ */
+@import "../site/fonts.css";
+
+:root {
+  /* Colour — brand palette. Muted plum #522B5B on cream canvas ≈ 9:1 (AAA). */
+  --canvas: #fbe4d8;
+  --paper: #fbe4d8; /* legacy alias used by older rules */
+  --ink: #190019;
+  --muted: #522b5b;
+  --lime: #dfb6b2; /* accent (blush): backgrounds and text on ink only */
+  --cobalt: #854f6c; /* accent (mauve): focus and data highlights */
+  --line: rgba(25, 0, 25, 0.14);
+  --line-strong: rgba(25, 0, 25, 0.32);
+  --surface: #fdf0e9;
+  --ink-soft: #2b124c;
+
+  /* Type */
+  --font-display: "Balimo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Balimo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Balimo", "Helvetica Neue", Arial, sans-serif;
+  --font-wide: "SA Triumph", "Arial Black", sans-serif;
+
+  /* Layout */
+  --content-max: 1400px;
+  --gutter: clamp(20px, 4vw, 56px);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-med: 320ms;
+  --dur-slow: 640ms;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px var(--canvas), 0 0 0 6px var(--cobalt);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-med: 0ms;
+    --dur-slow: 0ms;
+  }
+}

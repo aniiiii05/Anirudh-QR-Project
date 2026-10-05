@@ -10,7 +10,7 @@ This branch adds `/card` without replacing the existing `/` portfolio. It is a r
 - Email copied exactly from the existing public ContactSection. Mailbox ownership/delivery still needs an owner check.
 - Graduate description is owner-supplied and consistent with existing repository copy; it is not independent verification of a degree.
 - No phone, exact address, current employer, employment title, compensation, employer logo, private work, internship metrics or availability promise was added.
-- All three work entries are demos built with this page. They do not claim prior shipped products, customer results, or employer work. Alignaa and employer case studies are excluded pending permission and factual review.
+- All three work entries are demos built with this page. They do not claim prior shipped products, customer results, or employer work. Employer and employer-product case studies are excluded pending permission and factual review.
 - `src/card/profile.ts` is the source for public identity, links and visible project records. `publicApproval` marks safe demo records, not owner approval of historical claims. Set false to hide any record.
 - The original `/` portfolio is preserved and still contains older claims and phone information. These are not verified by this change and should be reviewed separately before using `/` as a current profile.
 
@@ -29,7 +29,7 @@ Before CONTACT_ENABLED=true, replace the setup notice and privacy copy with the 
 ## Deployment gates
 
 1. Owner approves public copy, email, LinkedIn and demo framing.
-2. Choose exact personal domain or suitable subdomain. Existing Alignaa product/domain and DNS remain untouched.
+2. Choose exact personal domain or suitable subdomain. Any existing employer product domain and DNS remain untouched.
 3. Deploy a Vercel preview from this branch; verify `/q`, `/card`, `/privacy`, `/contact.vcf` and `/api/contact`. SITE_ORIGIN controls canonical and social metadata at build time. Without it the card is noindex.
 4. Configure real contact delivery and update privacy copy as above, or launch with email only and remove the unavailable form.
 5. Check real iOS Safari and Android Chrome, keyboard, screen reader and slow-network behavior. Run production Lighthouse; scores are targets, not claimed results.

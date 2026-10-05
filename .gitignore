@@ -29,3 +29,12 @@ dist-ssr
 !.env.example
 .vercel
 artifacts/
+
+# Playwright output
+test-results/
+playwright-report/
+blob-report/
+
+# Raw design sources (large 3D files, licensed font packages). Processed
+# outputs live in public/site/ and src/site/fonts/ via `npm run assets`.
+Portfolio Design Assets/
